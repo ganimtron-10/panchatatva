@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://raw_assets/enemy/evil_wizard/EvilWizardASprite.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://game_assets/enemy/EvilWizard.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46.6628, 25.0613 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 50.0766, 37.7409 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 144.214, 28.4939 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 17.6545, 28.3788 )
+
+[node name="EvilWizard" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+script = ExtResource( 2 )
+
+[node name="Areas" type="Node2D" parent="."]
+
+[node name="Attack1Area" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Attack1Area"]
+modulate = Color( 0.0666667, 0.211765, 0.862745, 1 )
+position = Vector2( 69.7534, -58.1166 )
+shape = SubResource( 1 )
+
+[node name="Attack2Area" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Attack2Area"]
+modulate = Color( 0.992157, 0.992157, 0.972549, 1 )
+position = Vector2( 65.3644, 4.79348 )
+shape = SubResource( 2 )
+
+[node name="PlayerDectector" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/PlayerDectector"]
+modulate = Color( 0.243137, 1, 0, 1 )
+position = Vector2( 82.9048, 13.1028 )
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -0.975349 )
+frames = ExtResource( 1 )
+animation = "Idle"
+frame = 6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.682205, 13.7375 )
+shape = SubResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="body_entered" from="Areas/Attack1Area" to="." method="_on_Attack1Area_body_entered"]
+[connection signal="body_exited" from="Areas/Attack1Area" to="." method="_on_Attack1Area_body_exited"]
+[connection signal="body_entered" from="Areas/Attack2Area" to="." method="_on_Attack2Area_body_entered"]
+[connection signal="body_exited" from="Areas/Attack2Area" to="." method="_on_Attack2Area_body_exited"]
+[connection signal="body_entered" from="Areas/PlayerDectector" to="." method="_on_PlayerDectector_body_entered"]
+[connection signal="body_exited" from="Areas/PlayerDectector" to="." method="_on_PlayerDectector_body_exited"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

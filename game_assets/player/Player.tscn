@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://raw_assets/player/AdventurePlayerASprite.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://game_assets/player/Player.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.56626
+height = 17.6068
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.83871, 18.412 )
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+script = ExtResource( 2 )
+animArray = [ "Idle", "Run", "Jump", "Fall", "Attack1", "Hurt", "Die", "Attack2", "Attack3" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 0.237827 )
+frames = ExtResource( 1 )
+animation = "Attack2"
+frame = 5
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.150303, 3.26817 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+modulate = Color( 0, 0.164706, 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2( 15.4588, -0.475657 )
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -18.5851
+margin_top = -28.5712
+margin_right = 21.4149
+margin_bottom = -14.5712
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]

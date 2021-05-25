@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://raw_assets/enemy/mecha-golem/GolemASprite.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://game_assets/enemy/Golem.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 115.082, 25.292 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13.3091, 24.1511 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 11.22
+height = 21.5109
+
+[node name="Golem" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+script = ExtResource( 2 )
+
+[node name="Areas" type="Node2D" parent="."]
+
+[node name="PlayerDetector" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/PlayerDetector"]
+modulate = Color( 0.152941, 0.996078, 0.00784314, 1 )
+position = Vector2( 70.8602, -3.08094 )
+shape = SubResource( 1 )
+
+[node name="Attack1Area" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Attack1Area"]
+position = Vector2( 24.0474, -3.02267 )
+shape = SubResource( 2 )
+
+[node name="ArmSpwanner" type="Node2D" parent="Areas"]
+position = Vector2( 11.0415, -12.9786 )
+
+[node name="LaserSpwanner" type="Node2D" parent="Areas"]
+position = Vector2( 1.25137, -16.9996 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "ArmShoot"
+frame = 8
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2.38329 )
+shape = SubResource( 3 )
+
+[node name="ArmAttack" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 350, 0 )
+
+[node name="LaserAttack" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 100, 0 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="body_entered" from="Areas/PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="Areas/PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="body_entered" from="Areas/Attack1Area" to="." method="_on_Attack1Area_body_entered"]
+[connection signal="body_exited" from="Areas/Attack1Area" to="." method="_on_Attack1Area_body_exited"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

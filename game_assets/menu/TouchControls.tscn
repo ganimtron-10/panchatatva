@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://raw_assets/ui/yellow-!arrowleft.png" type="Texture" id=1]
+[ext_resource path="res://raw_assets/ui/yellow-!arrowright-pushed.png" type="Texture" id=2]
+[ext_resource path="res://raw_assets/ui/yellow-!arrowleft-pushed.png" type="Texture" id=3]
+[ext_resource path="res://raw_assets/ui/yellow-!arrowright.png" type="Texture" id=4]
+[ext_resource path="res://raw_assets/ui/yellow-A.png" type="Texture" id=5]
+[ext_resource path="res://raw_assets/ui/yellow-!arrowup-pushed.png" type="Texture" id=6]
+[ext_resource path="res://raw_assets/ui/yellow-A-pushed.png" type="Texture" id=7]
+[ext_resource path="res://raw_assets/ui/yellow-!arrowup.png" type="Texture" id=8]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_right = -100.0
+margin_bottom = -60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1080.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Top" type="Control" parent="VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 506.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 510.0
+margin_right = 1080.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+
+[node name="Left" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_right = 150.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+
+[node name="Left" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/Left"]
+scale = Vector2( 3, 3 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 3 )
+action = "left"
+visibility_mode = 1
+
+[node name="Right" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_left = 154.0
+margin_right = 304.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+
+[node name="Right" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/Right"]
+scale = Vector2( 3, 3 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 2 )
+action = "right"
+visibility_mode = 1
+
+[node name="MiddleGap" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_left = 308.0
+margin_right = 772.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Attack" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_left = 776.0
+margin_right = 926.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+
+[node name="Attack" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/Attack"]
+scale = Vector2( 3, 3 )
+normal = ExtResource( 5 )
+pressed = ExtResource( 7 )
+action = "attack1"
+visibility_mode = 1
+
+[node name="Jump" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_left = 930.0
+margin_right = 1080.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+
+[node name="Jump" type="TouchScreenButton" parent="VBoxContainer/HBoxContainer/Jump"]
+scale = Vector2( 3, 3 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 6 )
+action = "jump"
+visibility_mode = 1
